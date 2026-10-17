@@ -53,7 +53,7 @@ export const wedding = {
   })),
 
   music: {
-    src: '/audio/placeholder-melody.wav',
-    title: 'Placeholder melody (generated, royalty-free)',
+    src: '/audio/sbr.wav',
+    title: 'Background music',
   },
 }

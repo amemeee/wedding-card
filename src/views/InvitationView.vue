@@ -72,7 +72,7 @@ async function onEnvelopeOpened() {
       <div class="mt-6">
         <ShareButton :message="shareMessage" />
       </div>
-      <p class="mt-6 text-xs text-muted">Portfolio demo · all names, dates, places, photos and music are placeholders.</p>
+      <p class="mt-6 text-xs text-muted">Portfolio demo · all names, dates, places and photos are placeholders.</p>
     </footer>
   </main>
 
