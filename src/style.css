@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+/* Design tokens. Tailwind v4 turns each --color-* into utilities
+   like bg-ivory / text-gold, and --font-* into font-serif etc. */
+@theme {
+  --color-ivory: #faf7f2;
+  --color-cream: #f3ece1;
+  --color-blush: #e8c9c1;
+  /* sage / gold-deep are dark enough for small text on ivory (WCAG AA, 4.5:1).
+     The lighter gold is only for large decorative text like the names. */
+  --color-sage: #66765a;
+  --color-gold: #b08d57;
+  --color-gold-deep: #7f6030;
+  --color-ink: #3b3a36;
+
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-script: "Great Vibes", cursive;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-ivory text-ink font-sans antialiased;
+  }
+}
+
+/* Smooth scroll for in-page links (e.g. hero "Scroll" → #details),
+   disabled for people who ask the OS for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* <Transition name="fade"> adds these classes while the envelope leaves. */
+.fade-leave-active {
+  transition: opacity 0.6s ease;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* v-reveal directive: start slightly lower and transparent, then settle. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
+}
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: none;
+}

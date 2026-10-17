@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# SPA fallback: let Vue Router handle /admin etc. instead of Netlify returning 404.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

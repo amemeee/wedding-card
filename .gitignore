@@ -1,0 +1,17 @@
+# Dependencies & build output
+node_modules/
+dist/
+coverage/
+
+# Environment files — NEVER commit real keys
+.env
+.env.*
+!.env.example
+
+# Local tooling
+.netlify/
+*.local
+*.log
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
