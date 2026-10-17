@@ -14,5 +14,8 @@ export default defineConfig({
     environment: 'jsdom',
     include: ['tests/**/*.test.js'],
     setupFiles: ['tests/setup.js'],
+    // Vite also loads .env.local during tests. Blank the Supabase values so
+    // tests can never touch the real database (≈ Laravel's .env.testing).
+    env: { VITE_SUPABASE_URL: '', VITE_SUPABASE_PUBLISHABLE_KEY: '' },
   },
 })

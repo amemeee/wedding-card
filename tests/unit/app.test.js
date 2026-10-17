@@ -43,9 +43,10 @@ describe('app routing', () => {
     expect(wrapper.find('[data-test="waze-link"]').exists()).toBe(true)
   })
 
-  it('renders the admin placeholder at /admin', async () => {
+  it('redirects a signed-out visitor from /admin to the login page', async () => {
     const wrapper = await mountAt('/admin')
-    expect(wrapper.text()).toContain('Admin dashboard')
+    expect(wrapper.find('[data-test="login-form"]').exists()).toBe(true)
+    expect(wrapper.find('[data-test="rsvp-row"]').exists()).toBe(false)
   })
 
   it('shows a not-found page for unknown URLs', async () => {
