@@ -38,6 +38,55 @@
   }
 }
 
+/* Shiny gold text for the couple's names.
+   The gradient is painted as the element's background, then clipped to the
+   letter shapes (background-clip: text). Animating background-position
+   slides the bright band across the letters.
+   - Body of the gradient stays at accessible gold; only the moving
+     highlight is bright, so the names keep their contrast.
+   - Padding: script swashes overhang the box and would be clipped
+     (cut off) without it; the negative margin cancels the extra space.
+   - @supports: browsers without background-clip:text keep solid gold
+     instead of showing transparent (invisible) text. */
+.text-shimmer {
+  color: var(--color-gold);
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .text-shimmer {
+    padding: 0.08em 0.2em 0.18em;
+    margin: -0.08em -0.2em -0.18em;
+    background-image: linear-gradient(
+      110deg,
+      var(--color-gold-deep) 0%,
+      var(--color-gold) 38%,
+      #f4e2ae 50%,
+      var(--color-gold) 62%,
+      var(--color-gold-deep) 100%
+    );
+    background-size: 250% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .text-shimmer {
+      animation: shimmer 5s ease-in-out infinite;
+    }
+  }
+}
+/* Sweep takes 60% of the cycle, then rests: a glint, not a constant flicker. */
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  60%,
+  100% {
+    background-position: 0% 0;
+  }
+}
+
 /* <Transition name="fade"> adds these classes while the envelope leaves. */
 .fade-leave-active {
   transition: opacity 0.6s ease;

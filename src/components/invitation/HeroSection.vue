@@ -22,9 +22,10 @@ defineProps({
 
     <!-- tabindex="-1": focusable from code (after the envelope opens), but not a Tab stop. -->
     <h1 id="hero-title" tabindex="-1" class="relative mt-6 font-script leading-none text-gold outline-none">
-      <span class="block text-7xl sm:text-8xl">{{ partnerOne }}</span>
+      <!-- inline-block wrappers: the shimmer gradient sizes to each name, not the full width -->
+      <span class="block text-7xl sm:text-8xl"><span class="text-shimmer inline-block">{{ partnerOne }}</span></span>
       <span class="my-2 block font-serif text-3xl italic text-muted">&amp;</span>
-      <span class="block text-7xl sm:text-8xl">{{ partnerTwo }}</span>
+      <span class="block text-7xl sm:text-8xl"><span class="text-shimmer inline-block">{{ partnerTwo }}</span></span>
     </h1>
 
     <p class="relative mt-10 font-serif text-2xl tracking-widest text-ink" data-test="wedding-date">
