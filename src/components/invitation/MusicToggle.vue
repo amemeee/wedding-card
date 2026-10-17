@@ -12,10 +12,17 @@ const status = ref('paused')
 const audioEl = ref(null)
 
 const isPlaying = computed(() => status.value === 'playing')
-const label = computed(() => (isPlaying.value ? 'Pause background music' : 'Play background music'))
+const isLoading = computed(() => status.value === 'loading')
+const label = computed(() => {
+  if (isLoading.value) return 'Loading music'
+  return isPlaying.value ? 'Pause background music' : 'Play background music'
+})
 
 async function toggle() {
   const audio = audioEl.value
+  // Ignore taps while the file downloads (found on the live site: on a slow
+  // connection guests tapped again, thinking the button was broken).
+  if (isLoading.value) return
   if (isPlaying.value) {
     audio.pause()
     return
@@ -59,12 +66,26 @@ async function toggle() {
       :aria-label="label"
       :aria-pressed="isPlaying"
       :title="title"
-      :disabled="status === 'loading'"
+      :aria-busy="isLoading"
       data-test="music-toggle"
       @click="toggle"
     >
+      <!-- Loading spinner (spins only for users who haven't asked for reduced motion) -->
+      <svg
+        v-if="isLoading"
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        class="h-5 w-5 motion-safe:animate-spin"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        data-test="music-loading"
+      >
+        <circle cx="12" cy="12" r="9" stroke-opacity="0.25" />
+        <path d="M21 12a9 9 0 0 0-9-9" stroke-linecap="round" />
+      </svg>
       <!-- Pause icon -->
-      <svg v-if="isPlaying" aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor">
+      <svg v-else-if="isPlaying" aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor">
         <rect x="6" y="5" width="4" height="14" rx="1" />
         <rect x="14" y="5" width="4" height="14" rx="1" />
       </svg>

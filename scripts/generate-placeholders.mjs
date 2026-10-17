@@ -31,7 +31,9 @@ palettes.forEach(([from, to], i) => {
 })
 
 // ---------- Music: 16-second looping music-box arpeggio (16-bit mono WAV) ----------
-const sampleRate = 16000
+// 11,025 Hz keeps the highest overtone (~1 kHz × 2) well within range while
+// making the file ~30% smaller than 16 kHz. A real track should be MP3/AAC.
+const sampleRate = 11025
 const noteSeconds = 0.5
 // C major → A minor → F major → G major (Hz), each played up then down.
 const chords = [
