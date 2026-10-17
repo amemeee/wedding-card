@@ -6,15 +6,21 @@
   --color-ivory: #faf7f2;
   --color-cream: #f3ece1;
   --color-blush: #e8c9c1;
-  /* sage / gold-deep are dark enough for small text on ivory (WCAG AA, 4.5:1).
-     The lighter gold is only for large decorative text like the names. */
-  --color-sage: #66765a;
-  --color-gold: #b08d57;
+  /* Contrast-checked with axe-core against ivory, cream AND the blush glow:
+     - sage, gold-deep, muted: ≥ 4.5:1, safe for small text (WCAG AA)
+     - gold: ≥ 3:1, ONLY for large text (the script names)
+     Use `muted` for secondary text instead of semi-transparent ink
+     (e.g. text-ink/60), which fades below 4.5:1 on tinted backgrounds. */
+  --color-sage: #5a694e;
+  --color-gold: #9c7a45;
   --color-gold-deep: #7f6030;
   --color-ink: #3b3a36;
+  --color-muted: #5f5d57;
 
   --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
-  --font-script: "Great Vibes", cursive;
+  /* Fallback is the serif, NOT `cursive`, which is Comic Sans on Windows and
+     would flash on slow connections before Great Vibes loads. */
+  --font-script: "Great Vibes", "Cormorant Garamond", Georgia, serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 

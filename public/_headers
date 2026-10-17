@@ -1,0 +1,27 @@
+# Netlify security headers. Files in public/ are copied to dist/ as-is,
+# and Netlify applies this file to every response.
+# vite.config.js also reads this file so `npm run preview` tests the same policy.
+#
+# Content-Security-Policy, directive by directive:
+#   default-src 'self'          anything not listed below: same origin only
+#   script-src 'self'           no inline or third-party scripts (main XSS defence)
+#   style-src ... fonts         our CSS + the Google Fonts stylesheet
+#   font-src fonts.gstatic      Google font files
+#   img-src 'self' data:        our images (+ data: URIs some libraries use)
+#   media-src 'self'            our music file
+#   connect-src *.supabase.co   the only API the browser may call
+#   frame-ancestors 'none'      nobody may embed the site in an iframe (clickjacking)
+#   base-uri / form-action      block <base> hijacking and off-site form posts
+#   object-src 'none'           no Flash/plugins
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# Hashed build files never change, so browsers may cache them for a year.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

@@ -21,8 +21,8 @@ const links = computed(() => [
       <SectionHeading id="venue-title" eyebrow="Where" title="The Venue" />
 
       <h3 class="mt-8 font-serif text-2xl text-ink">{{ venue.name }}</h3>
-      <address class="mt-2 not-italic text-ink/70">{{ venue.address }}</address>
-      <p v-if="venue.note" class="mt-2 text-xs italic text-ink/50">{{ venue.note }}</p>
+      <address class="mt-2 not-italic text-muted">{{ venue.address }}</address>
+      <p v-if="venue.note" class="mt-2 text-xs italic text-muted">{{ venue.note }}</p>
 
       <div class="mt-8 grid grid-cols-2 gap-3">
         <!-- target=_blank + rel=noopener stops the new tab controlling this page -->

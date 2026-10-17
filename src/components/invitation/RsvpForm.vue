@@ -72,7 +72,7 @@ function resetForm() {
     <div class="mx-auto max-w-md">
       <SectionHeading id="rsvp-title" eyebrow="Kindly reply" title="RSVP" />
 
-      <p v-if="deadlineLabel && !isClosed" class="mt-6 text-center text-sm text-ink/70">
+      <p v-if="deadlineLabel && !isClosed" class="mt-6 text-center text-sm text-muted">
         Please respond by <span class="font-semibold text-ink">{{ deadlineLabel }}</span>.
       </p>
 
@@ -151,7 +151,7 @@ function resetForm() {
 
         <div>
           <label for="rsvp-wishes" class="block text-sm font-medium text-ink">
-            Wishes for the couple <span class="font-normal text-ink/60">(optional)</span>
+            Wishes for the couple <span class="font-normal text-muted">(optional)</span>
           </label>
           <textarea
             id="rsvp-wishes"
@@ -162,7 +162,7 @@ function resetForm() {
             aria-describedby="rsvp-wishes-count"
             class="field mt-2 resize-y"
           ></textarea>
-          <p id="rsvp-wishes-count" class="mt-1 text-right text-xs text-ink/60">{{ wishesLeft }} characters left</p>
+          <p id="rsvp-wishes-count" class="mt-1 text-right text-xs text-muted">{{ wishesLeft }} characters left</p>
           <p v-if="errors.wishes" class="field-error">{{ errors.wishes }}</p>
         </div>
 
@@ -191,7 +191,7 @@ function resetForm() {
           {{ status === 'submitting' ? 'Sending…' : 'Send RSVP' }}
         </button>
 
-        <p class="text-center text-xs text-ink/60">
+        <p class="text-center text-xs text-muted">
           We only store your name, reply and optional message, and only the couple can see them.
         </p>
       </form>

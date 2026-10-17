@@ -23,18 +23,18 @@ defineProps({
     <!-- tabindex="-1": focusable from code (after the envelope opens), but not a Tab stop. -->
     <h1 id="hero-title" tabindex="-1" class="relative mt-6 font-script leading-none text-gold outline-none">
       <span class="block text-7xl sm:text-8xl">{{ partnerOne }}</span>
-      <span class="my-2 block font-serif text-3xl italic text-ink/50">&amp;</span>
+      <span class="my-2 block font-serif text-3xl italic text-muted">&amp;</span>
       <span class="block text-7xl sm:text-8xl">{{ partnerTwo }}</span>
     </h1>
 
     <p class="relative mt-10 font-serif text-2xl tracking-widest text-ink" data-test="wedding-date">
       {{ dateLabel }}
     </p>
-    <p class="relative mt-2 text-sm text-ink/60">{{ venueName }}</p>
+    <p class="relative mt-2 text-sm text-muted">{{ venueName }}</p>
 
     <a
       href="#details"
-      class="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.3em] text-ink/50 transition hover:text-gold-deep focus-visible:text-gold-deep"
+      class="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.3em] text-muted transition hover:text-gold-deep focus-visible:text-gold-deep"
     >
       Scroll
       <span aria-hidden="true" class="mt-1 block text-base">↓</span>

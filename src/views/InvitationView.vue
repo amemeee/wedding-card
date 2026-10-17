@@ -68,11 +68,11 @@ async function onEnvelopeOpened() {
       <p class="font-script text-4xl text-gold">
         {{ wedding.couple.partnerOne }} &amp; {{ wedding.couple.partnerTwo }}
       </p>
-      <p class="mt-2 text-sm tracking-wide text-ink/60">{{ wedding.couple.hashtag }}</p>
+      <p class="mt-2 text-sm tracking-wide text-muted">{{ wedding.couple.hashtag }}</p>
       <div class="mt-6">
         <ShareButton :message="shareMessage" />
       </div>
-      <p class="mt-6 text-xs text-ink/40">Portfolio demo · all names, dates, places, photos and music are placeholders.</p>
+      <p class="mt-6 text-xs text-muted">Portfolio demo · all names, dates, places, photos and music are placeholders.</p>
     </footer>
   </main>
 

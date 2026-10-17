@@ -56,7 +56,7 @@ onUnmounted(() => {
       <div class="envelope-back"></div>
       <div class="envelope-card">
         <span class="font-script text-3xl text-gold">{{ partnerOne[0] }} &amp; {{ partnerTwo[0] }}</span>
-        <span class="mt-1 text-[0.65rem] tracking-[0.3em] text-ink/60">{{ dateLabel }}</span>
+        <span class="mt-1 text-[0.65rem] tracking-[0.3em] text-muted">{{ dateLabel }}</span>
       </div>
       <div class="envelope-pocket"></div>
       <div class="envelope-flap"></div>

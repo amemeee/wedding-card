@@ -50,7 +50,7 @@ onMounted(load)
       <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6">
         <div>
           <h1 class="font-serif text-2xl text-ink">RSVP Dashboard</h1>
-          <p v-if="session" class="text-xs text-ink/60">Signed in as {{ session.user.email }}</p>
+          <p v-if="session" class="text-xs text-muted">Signed in as {{ session.user.email }}</p>
         </div>
         <div class="flex gap-2">
           <button type="button" class="admin-btn" :disabled="status === 'loading'" data-test="refresh" @click="load">
@@ -90,15 +90,15 @@ onMounted(load)
       </div>
 
       <!-- aria-live announces the new count to screen readers as filters change. -->
-      <p class="text-sm text-ink/70" aria-live="polite" data-test="result-count">
+      <p class="text-sm text-muted" aria-live="polite" data-test="result-count">
         Showing {{ visibleRows.length }} of {{ rows.length }} responses
       </p>
 
-      <p v-if="status === 'loading' && rows.length === 0" class="py-12 text-center text-ink/60">Loading RSVPs…</p>
-      <p v-else-if="status === 'ready' && rows.length === 0" class="py-12 text-center text-ink/60" data-test="empty">
+      <p v-if="status === 'loading' && rows.length === 0" class="py-12 text-center text-muted">Loading RSVPs…</p>
+      <p v-else-if="status === 'ready' && rows.length === 0" class="py-12 text-center text-muted" data-test="empty">
         No RSVPs yet. Share the invitation to start receiving replies.
       </p>
-      <p v-else-if="rows.length > 0 && visibleRows.length === 0" class="py-12 text-center text-ink/60" data-test="no-matches">
+      <p v-else-if="rows.length > 0 && visibleRows.length === 0" class="py-12 text-center text-muted" data-test="no-matches">
         No responses match your search.
       </p>
       <RsvpTable v-else-if="visibleRows.length > 0" :rows="visibleRows" />

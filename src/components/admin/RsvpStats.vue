@@ -27,7 +27,7 @@ const cards = computed(() => [
         {{ card.label }}
       </dt>
       <dd class="mt-2 font-serif text-4xl tabular-nums">{{ card.value }}</dd>
-      <dd class="mt-1 text-xs" :class="card.primary ? 'text-ivory/80' : 'text-ink/60'">{{ card.hint }}</dd>
+      <dd class="mt-1 text-xs" :class="card.primary ? 'text-ivory/80' : 'text-muted'">{{ card.hint }}</dd>
     </div>
   </dl>
 </template>

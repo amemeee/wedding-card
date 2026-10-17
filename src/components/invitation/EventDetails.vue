@@ -33,11 +33,11 @@ defineProps({
         >
           <h3 class="font-serif text-2xl text-ink">{{ event.title }}</h3>
           <p class="mt-1 text-sm font-medium tracking-wide text-gold-deep">{{ event.time }}</p>
-          <p v-if="event.description" class="mt-3 text-sm text-ink/70">{{ event.description }}</p>
+          <p v-if="event.description" class="mt-3 text-sm text-muted">{{ event.description }}</p>
         </li>
       </ol>
 
-      <p v-if="dressCode" class="mt-8 text-center text-sm text-ink/70">
+      <p v-if="dressCode" class="mt-8 text-center text-sm text-muted">
         <span class="font-semibold text-ink">Dress code:</span> {{ dressCode }}
       </p>
     </div>
