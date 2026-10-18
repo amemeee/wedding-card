@@ -91,7 +91,9 @@ DevTools protocol, with axe-core loaded only for the audit (`npm install --no-sa
 | Music (live) | ❌ → fixed | File took 0.5–1.6 s to load with no feedback; added loading state, regression test |
 | Music on throttled network | ✅ | Spinner shown, repeat taps ignored, playing after ~5 s at 400 kbit/s |
 | Gold shimmer | ✅ | Swashes not clipped; disabled under reduced motion; axe 0, CSP 0; 92/92 tests |
-| Custom track `sbr.wav` | ⚠️ open | 17.5 MB WAV starts in 0.65 s on 4G but needs ~1.4 Mbit/s to play without stutter. MP3 recommended. |
+| Custom track `sbr.wav` | ⚠️ replaced | 17.5 MB WAV needed ~1.4 Mbit/s to play without stutter; replaced by MP3 |
+| MP3 swap (live) | ❌ → fixed | WAV deleted but config still pointed at it. The SPA fallback returned the page HTML with **200**, so the music failed silently. Config fixed; new test checks every configured asset exists and that audio is compressed. |
+| `sbr.mp3` (3.6 MB, ~291 kbps VBR) | ✅ | Playing after 1.4 s at 400 kbit/s (WAV: 5.3 s) and within 0.3 s on 4G; 95/95 tests |
 
 ## Not verified
 

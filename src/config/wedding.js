@@ -53,7 +53,7 @@ export const wedding = {
   })),
 
   music: {
-    src: '/audio/sbr.wav',
+    src: '/audio/sbr.mp3',
     title: 'Background music',
   },
 }
