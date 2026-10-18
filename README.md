@@ -224,4 +224,5 @@ and a first server-side function for per-wedding link previews.
 
 ## License
 
-No license has been chosen yet, so all rights are reserved by default.
+© 2026 amemeee. **All rights reserved.** This code is shared for viewing as a portfolio piece only.
+You may not copy, modify, or reuse it without written permission. See [LICENSE](LICENSE).
