@@ -3,10 +3,15 @@
 // from here so a real couple would only need to edit this one file.
 
 export const wedding = {
+  // Names are optional: leave either empty ('') to show `title` instead.
+  // monogram (e.g. 'AH') appears on the envelope seal and card; leave it
+  // empty to show a rings emblem there instead.
   couple: {
-    partnerOne: 'Syahirah',
-    partnerTwo: 'Amin',
-    hashtag: '#SyahirahAndAmin2027',
+    partnerOne: 'The Groom',
+    partnerTwo: 'The Bride',
+    title: 'Our Wedding',
+    monogram: '',
+    hashtag: '', // optional, e.g. '#AleyaAndHaris2027'
   },
 
   // ISO 8601 with an explicit offset, so the countdown is correct for

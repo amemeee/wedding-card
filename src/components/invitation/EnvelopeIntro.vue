@@ -1,11 +1,20 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { hasCoupleNames, coupleTitle } from '@/utils/couple'
+import RingsEmblem from '@/components/ui/RingsEmblem.vue'
 
-defineProps({
-  partnerOne: { type: String, required: true },
-  partnerTwo: { type: String, required: true },
+const props = defineProps({
+  // Names are optional; without them the title and a rings emblem are shown.
+  partnerOne: { type: String, default: '' },
+  partnerTwo: { type: String, default: '' },
+  title: { type: String, default: '' },
+  // Shown on the seal and card, e.g. 'AH'. Empty → rings emblem.
+  monogram: { type: String, default: '' },
   dateLabel: { type: String, required: true },
 })
+
+const showNames = computed(() => hasCoupleNames(props))
+const heading = computed(() => coupleTitle(props))
 
 // defineEmits ≈ declaring which events this component can fire upward.
 // The parent listens with @opened="...". Data flows down via props,
@@ -47,20 +56,31 @@ onUnmounted(() => {
   >
     <div class="text-center">
       <p id="envelope-title" class="text-xs font-medium uppercase tracking-[0.25em] text-balance text-sage">
-        You are invited to the wedding of
+        {{ showNames ? 'You are invited to the wedding of' : 'You are invited to' }}
       </p>
-      <p class="mt-3 font-script text-5xl text-gold">{{ partnerOne }} &amp; {{ partnerTwo }}</p>
+      <!-- nowrap per name: lines break between the names ("The Groom & / The Bride"),
+           never inside one ("The Groom & The / Bride"). -->
+      <p class="mt-3 font-script text-5xl text-balance text-gold" data-test="envelope-heading">
+        <template v-if="showNames">
+          <span class="whitespace-nowrap">{{ partnerOne }} &amp;</span> <span class="whitespace-nowrap">{{ partnerTwo }}</span>
+        </template>
+        <template v-else>{{ heading }}</template>
+      </p>
     </div>
 
     <div class="envelope" :class="{ 'is-open': isOpening }" aria-hidden="true">
       <div class="envelope-back"></div>
       <div class="envelope-card">
-        <span class="font-script text-3xl text-gold">{{ partnerOne[0] }} &amp; {{ partnerTwo[0] }}</span>
+        <span v-if="monogram" class="font-script text-3xl text-gold">{{ monogram }}</span>
+        <RingsEmblem v-else class="h-6 w-10 text-gold" />
         <span class="mt-1 text-[0.65rem] tracking-[0.3em] text-muted">{{ dateLabel }}</span>
       </div>
       <div class="envelope-pocket"></div>
       <div class="envelope-flap"></div>
-      <span class="envelope-seal font-script">{{ partnerOne[0] }}{{ partnerTwo[0] }}</span>
+      <span class="envelope-seal font-script" data-test="envelope-seal">
+        <template v-if="monogram">{{ monogram }}</template>
+        <RingsEmblem v-else class="h-5 w-8" />
+      </span>
     </div>
 
     <button

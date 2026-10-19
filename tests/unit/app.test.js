@@ -4,6 +4,7 @@ import { createMemoryHistory } from 'vue-router'
 import App from '@/App.vue'
 import { createAppRouter } from '@/router'
 import { wedding } from '@/config/wedding'
+import { coupleTitle } from '@/utils/couple'
 
 // Helper: mount the whole app at a given URL with an isolated router.
 async function mountAt(path) {
@@ -18,8 +19,9 @@ async function mountAt(path) {
 describe('app routing', () => {
   it('renders the couple names and formatted date on the invitation page', async () => {
     const wrapper = await mountAt('/')
-    expect(wrapper.text()).toContain(wedding.couple.partnerOne)
-    expect(wrapper.text()).toContain(wedding.couple.partnerTwo)
+    // Names or the fallback title, whichever the config uses.
+    expect(wrapper.get('#hero-title').text()).toContain(coupleTitle(wedding.couple).split(' & ')[0])
+    expect(wrapper.get('[data-test="footer-title"]').text()).toBe(coupleTitle(wedding.couple))
     // Hero shows the numeric date; the details section shows the long form.
     expect(wrapper.get('[data-test="wedding-date"]').text()).toBe('12 · 06 · 2027')
     // Intl punctuation varies between ICU versions, so check the parts that matter.

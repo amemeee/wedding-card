@@ -190,6 +190,8 @@ so after changing one in Netlify, use **Deploys → Trigger deploy**.
 
 - **Content:** edit [`src/config/wedding.js`](src/config/wedding.js). Names, date (ISO 8601 with offset), timezone,
   message, events, dress code, venue, RSVP deadline, gallery and music all live there.
+- **Names are optional.** Leave `partnerOne` / `partnerTwo` empty to show `title` (e.g. "Our Wedding") everywhere instead.
+  Set `monogram` (e.g. `'AH'`) for the envelope seal, or leave it empty for a rings emblem.
 - **Photos:** put images in `public/gallery/` and list them in `gallery` with `width`, `height` and descriptive `alt` text.
 - **Music:** put the file in `public/audio/` and set `music.src`. Prefer **MP3 at about 128 kbps**:
   uncompressed WAV is about 10× larger, uses guests' mobile data and can stutter on slow connections.

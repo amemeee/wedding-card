@@ -1,10 +1,18 @@
 <script setup>
-defineProps({
-  partnerOne: { type: String, required: true },
-  partnerTwo: { type: String, required: true },
+import { computed } from 'vue'
+import { hasCoupleNames, coupleTitle } from '@/utils/couple'
+
+const props = defineProps({
+  // Names are optional; without them the title (e.g. "Our Wedding") is shown.
+  partnerOne: { type: String, default: '' },
+  partnerTwo: { type: String, default: '' },
+  title: { type: String, default: '' },
   dateLabel: { type: String, required: true },
   venueName: { type: String, required: true },
 })
+
+const showNames = computed(() => hasCoupleNames(props))
+const heading = computed(() => coupleTitle(props))
 </script>
 
 <template>
@@ -18,14 +26,19 @@ defineProps({
       class="pointer-events-none absolute inset-x-0 top-1/4 mx-auto h-72 w-72 rounded-full bg-blush/40 blur-3xl"
     ></div>
 
-    <p class="relative text-xs font-medium uppercase tracking-[0.4em] text-sage">The wedding of</p>
+    <p class="relative text-xs font-medium uppercase tracking-[0.4em] text-sage">
+      {{ showNames ? 'The wedding of' : 'You are invited to' }}
+    </p>
 
     <!-- tabindex="-1": focusable from code (after the envelope opens), but not a Tab stop. -->
     <h1 id="hero-title" tabindex="-1" class="relative mt-6 font-script leading-none text-gold outline-none">
       <!-- inline-block wrappers: the shimmer gradient sizes to each name, not the full width -->
-      <span class="block text-7xl sm:text-8xl"><span class="text-shimmer inline-block">{{ partnerOne }}</span></span>
-      <span class="my-2 block font-serif text-3xl italic text-muted">&amp;</span>
-      <span class="block text-7xl sm:text-8xl"><span class="text-shimmer inline-block">{{ partnerTwo }}</span></span>
+      <template v-if="showNames">
+        <span class="block text-7xl sm:text-8xl"><span class="text-shimmer inline-block">{{ partnerOne }}</span></span>
+        <span class="my-2 block font-serif text-3xl italic text-muted">&amp;</span>
+        <span class="block text-7xl sm:text-8xl"><span class="text-shimmer inline-block">{{ partnerTwo }}</span></span>
+      </template>
+      <span v-else class="block text-7xl sm:text-8xl"><span class="text-shimmer inline-block">{{ heading }}</span></span>
     </h1>
 
     <p class="relative mt-10 font-serif text-2xl tracking-widest text-ink" data-test="wedding-date">

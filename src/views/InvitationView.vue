@@ -2,6 +2,7 @@
 import { ref, nextTick } from 'vue'
 import { wedding } from '@/config/wedding'
 import { formatLongDate, formatNumericDate } from '@/utils/date'
+import { coupleTitle, hasCoupleNames, shareMessage as buildShareMessage } from '@/utils/couple'
 import { vReveal } from '@/directives/reveal'
 import EnvelopeIntro from '@/components/invitation/EnvelopeIntro.vue'
 import HeroSection from '@/components/invitation/HeroSection.vue'
@@ -18,7 +19,8 @@ import ShareButton from '@/components/invitation/ShareButton.vue'
 const numericDate = formatNumericDate(wedding.date, wedding.timezone)
 const longDate = formatLongDate(wedding.date, wedding.timezone)
 const rsvpDeadlineLabel = formatLongDate(wedding.rsvpDeadline, wedding.timezone)
-const shareMessage = `You're invited to the wedding of ${wedding.couple.partnerOne} & ${wedding.couple.partnerTwo} on ${longDate}.`
+const shareMessage = buildShareMessage(wedding.couple, longDate)
+const footerTitle = coupleTitle(wedding.couple)
 
 const opened = ref(false)
 
@@ -38,6 +40,8 @@ async function onEnvelopeOpened() {
       v-if="!opened"
       :partner-one="wedding.couple.partnerOne"
       :partner-two="wedding.couple.partnerTwo"
+      :title="wedding.couple.title"
+      :monogram="wedding.couple.monogram"
       :date-label="numericDate"
       @opened="onEnvelopeOpened"
     />
@@ -49,6 +53,7 @@ async function onEnvelopeOpened() {
     <HeroSection
       :partner-one="wedding.couple.partnerOne"
       :partner-two="wedding.couple.partnerTwo"
+      :title="wedding.couple.title"
       :date-label="numericDate"
       :venue-name="wedding.venue.name"
     />
@@ -65,10 +70,15 @@ async function onEnvelopeOpened() {
     <RsvpForm v-reveal :deadline="wedding.rsvpDeadline" :deadline-label="rsvpDeadlineLabel" />
 
     <footer class="bg-cream px-6 py-12 text-center">
-      <p class="font-script text-4xl text-gold">
-        {{ wedding.couple.partnerOne }} &amp; {{ wedding.couple.partnerTwo }}
+      <p class="font-script text-4xl text-balance text-gold" data-test="footer-title">
+        <!-- Keep both spans on ONE line: Vue drops whitespace between elements
+             when it contains a newline, which would render "The Groom &The Bride". -->
+        <template v-if="hasCoupleNames(wedding.couple)">
+          <span class="whitespace-nowrap">{{ wedding.couple.partnerOne }} &amp;</span> <span class="whitespace-nowrap">{{ wedding.couple.partnerTwo }}</span>
+        </template>
+        <template v-else>{{ footerTitle }}</template>
       </p>
-      <p class="mt-2 text-sm tracking-wide text-muted">{{ wedding.couple.hashtag }}</p>
+      <p v-if="wedding.couple.hashtag" class="mt-2 text-sm tracking-wide text-muted">{{ wedding.couple.hashtag }}</p>
       <div class="mt-6">
         <ShareButton :message="shareMessage" />
       </div>

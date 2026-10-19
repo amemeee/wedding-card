@@ -98,6 +98,6 @@ DevTools protocol, with axe-core loaded only for the audit (`npm install --no-sa
 ## Not verified
 
 - Admin dashboard accessibility audit (requires a signed-in admin; uses the same tokens and patterns as audited pages)
-- Physical phones: mobile behaviour was checked with Chrome device emulation and network throttling, not on real devices
+- Physical phones beyond the owner's: the owner confirmed the full flow on their own phone (envelope, music, RSVP, dashboard); other devices were covered by Chrome device emulation and network throttling only
 - Real screen readers (NVDA, VoiceOver): accessibility was checked with axe-core rules and keyboard/focus tests only
 - Browsers other than Chrome (Safari, Firefox)
